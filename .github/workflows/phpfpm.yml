@@ -19,4 +19,4 @@ jobs:
           tag_with_latest: true
           extra_args: "--build-arg COMMIT_SHA=${{ github.sha }} --use-new-run"
           image: herams-who/docker/phpfpm
-          build_file: nginx/Dockerfile
+          build_file: phpfpm/Dockerfile
