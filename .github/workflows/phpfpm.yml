@@ -1,4 +1,4 @@
-name: Build nginx
+name: Build phpfpm
 on:
   push:
     branches: [ master ]
@@ -18,5 +18,5 @@ jobs:
           tag: ${{ github.sha }}
           tag_with_latest: true
           extra_args: "--build-arg COMMIT_SHA=${{ github.sha }} --use-new-run"
-          image: herams-who/docker/nginx
+          image: herams-who/docker/phpfpm
           build_file: nginx/Dockerfile
