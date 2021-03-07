@@ -1,0 +1,26 @@
+name: Build nginx
+on:
+  push:
+    branches: [ master ]
+jobs:
+  build:
+    name: Build container
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v2
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - id: kaniko_build
+        name: Kaniko build
+        uses: aevea/action-kaniko@master
+        with:
+          registry: ghcr.io
+          password: ${{ secrets.GHCR_TOKEN }}
+          tag: ${{ github.sha }}
+          tag_with_latest: true
+          extra_args: "--build-arg COMMIT_SHA=${{ github.sha }} --use-new-run"
+          image: herams-who/docker/nginx
+          build_file: nginx/Dockerfile
