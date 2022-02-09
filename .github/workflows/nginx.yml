@@ -4,6 +4,7 @@ on:
     branches: [ master ]
     paths:
       - 'nginx/**'
+      - '.github/workflows/nginx.yml'
 jobs:
   build:
     name: Build container
@@ -11,6 +12,22 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v2
+      - uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - id: manual_kaniko_build
+        run: >
+          docker run
+          -v ~/.docker:/kaniko/.docker
+          -v $(pwd)/php:/context
+          gcr.io/kaniko-project/executor
+          --context dir:///context/
+          --destination ghcr.io/herams-who/docker/php:${{ github.sha }}
+          --destination ghcr.io/herams-who/docker/php:latest
+          --build-arg COMMIT_SHA=${{ github.sha }}
+          --use-new-run
       - id: kaniko_build
         name: Kaniko build
         uses: aevea/action-kaniko@master
