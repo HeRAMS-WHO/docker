@@ -24,8 +24,8 @@ jobs:
           -v $(pwd)/php:/context
           gcr.io/kaniko-project/executor
           --context dir:///context/
-          --destination ghcr.io/herams-who/docker/php:${{ github.sha }}
-          --destination ghcr.io/herams-who/docker/php:latest
+          --destination ghcr.io/herams-who/docker/nginx:${{ github.sha }}
+          --destination ghcr.io/herams-who/docker/nginx:latest
           --build-arg COMMIT_SHA=${{ github.sha }}
           --use-new-run
       - id: kaniko_build
