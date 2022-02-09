@@ -2,6 +2,8 @@ name: Build nginx
 on:
   push:
     branches: [ master ]
+    paths:
+      - 'nginx/**'
 jobs:
   build:
     name: Build container

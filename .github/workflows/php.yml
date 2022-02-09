@@ -1,9 +1,9 @@
-name: Build phpfpm
+name: Build php
 on:
   push:
     branches: [ master ]
     paths:
-      - 'phpfpm/**'
+      - 'php/**'
 jobs:
   build:
     name: Build container
@@ -20,5 +20,5 @@ jobs:
           tag: ${{ github.sha }}
           tag_with_latest: true
           extra_args: "--build-arg COMMIT_SHA=${{ github.sha }} --use-new-run"
-          image: herams-who/docker/phpfpm
-          build_file: phpfpm/Dockerfile
+          image: herams-who/docker/php
+          build_file: php/Dockerfile
