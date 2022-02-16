@@ -29,7 +29,7 @@ RUN install-php-extensions \
   xmlwriter \
   zip
 ADD php-fpm.conf /
-ADD xdebug.ini /etc/php8/conf.d/50_xdebug.ini
+ADD xdebug.ini 	/usr/local/etc/php/conf.d/50_xdebug.ini
 ADD init.sh /sbin/init.sh
 RUN mkdir -p /run && chown nobody:nobody /run
 
