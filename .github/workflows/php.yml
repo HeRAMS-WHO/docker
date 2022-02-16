@@ -27,6 +27,8 @@ jobs:
         with:
           push: true
           context: php
+          build-args: |
+            COMMIT_SHA=${{ github.sha }}
           tags: |
             ghcr.io/herams-who/docker/php:${{ github.sha }}
             ghcr.io/herams-who/docker/php:latest
