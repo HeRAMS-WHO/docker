@@ -17,7 +17,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - id: test empty push
+      - id: test_empty_push
         run: docker pull alpine && docker tag alpine ghcr.io/herams-who/docker/php:${{ github.sha }} && docker push ghcr.io/herams-who/docker/php:${{ github.sha }}
       - id: manual_kaniko_build
         run: >
