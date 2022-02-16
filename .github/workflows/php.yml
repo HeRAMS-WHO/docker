@@ -22,7 +22,7 @@ jobs:
           docker run
           -v ~/.docker:/kaniko/.docker
           -v $(pwd)/php:/context
-          gcr.io/kaniko-project/executor@99a09a7153a35346604b91b7499547e608505430
+          gcr.io/kaniko-project/executor:99a09a7153a35346604b91b7499547e608505430
           --context dir:///context/
           --destination ghcr.io/herams-who/docker/php:${{ github.sha }}
           --destination ghcr.io/herams-who/docker/php:latest
