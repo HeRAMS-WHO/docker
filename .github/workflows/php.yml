@@ -17,13 +17,11 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - id: docker_build
-        env:
-          DOCKER_BUILDKIT: "1"
-        working-directory: php
-        run: >
-          docker build .
-          --pull
-          -t ghcr.io/herams-who/docker/php:${{ github.sha }}
-          -t ghcr.io/herams-who/docker/php:latest
-          --build-arg COMMIT_SHA=${{ github.sha }}
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v2.9.0
+        with:
+          push: true
+          context: php
+          tags: |
+            ghcr.io/herams-who/docker/php:${{ github.sha }}
+            ghcr.io/herams-who/docker/php:latest

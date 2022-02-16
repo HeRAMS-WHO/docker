@@ -5,29 +5,29 @@ RUN apk add --update --no-cache \
   wait4ports \
   jq \
   npm
-# RUN install-php-extensions \
-#   @composer \
-#   ctype \
-#   curl \
-#   dom \
-#   gd \
-#   intl \
-#   json \
-#   mbstring \
-#   openssl \
-#   pcov \
-#   pdo_mysql \
-#   phar \
-#   posix \
-#   session \
-#   simplexml \
-#   sodium \
-#   tokenizer \
-#   xdebug \
-#   xlswriter \
-#   xml \
-#   xmlwriter \
-#   zip
+RUN install-php-extensions \
+  @composer \
+  ctype \
+  curl \
+  dom \
+  gd \
+  intl \
+  json \
+  mbstring \
+  openssl \
+  pcov \
+  pdo_mysql \
+  phar \
+  posix \
+  session \
+  simplexml \
+  sodium \
+  tokenizer \
+  xdebug \
+  xlswriter \
+  xml \
+  xmlwriter \
+  zip
 ADD php-fpm.conf /
 ADD xdebug.ini 	/usr/local/etc/php/conf.d/50_xdebug.ini
 ADD init.sh /sbin/init.sh
