@@ -17,14 +17,12 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - id: test_empty_push
-        run: docker pull alpine && docker tag alpine ghcr.io/herams-who/docker/php:${{ github.sha }} && docker push ghcr.io/herams-who/docker/php:${{ github.sha }}
       - id: manual_kaniko_build
         run: >
           docker run
           -v ~/.docker:/kaniko/.docker
           -v $(pwd)/php:/context
-          gcr.io/kaniko-project/executor
+          gcr.io/kaniko-project/executor@sha256:57f2f8bd18c05f9cdfec586cf6d3a85f962163fc20e984bfa39bd14234cf176c
           --context dir:///context/
           --destination ghcr.io/herams-who/docker/php:${{ github.sha }}
           --destination ghcr.io/herams-who/docker/php:latest
