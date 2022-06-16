@@ -29,10 +29,10 @@ RUN install-php-extensions \
   xmlwriter \
   zip
 ADD php-fpm.conf /
-ADD xdebug.ini /etc/php8/conf.d/50_xdebug.ini
+ADD xdebug.ini 	/usr/local/etc/php/conf.d/50_xdebug.ini
 ADD init.sh /sbin/init.sh
 RUN mkdir -p /run && chown nobody:nobody /run
-
+RUN echo "${COMMIT_SHA}" > /commit_sha
 #Mount a tmpfs here
 VOLUME /run
 ENTRYPOINT ["/sbin/init.sh"]
