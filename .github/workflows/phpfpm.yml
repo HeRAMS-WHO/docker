@@ -3,6 +3,7 @@ on:
   push:
     branches: [ master ]
     paths:
+      - '.github/workflows/phpfpm.yml'
       - 'phpfpm/**'
 jobs:
   build:
@@ -11,14 +12,12 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v2
-      - id: kaniko_build
-        name: Kaniko build
-        uses: aevea/action-kaniko@master
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v2.9.0
         with:
-          registry: ghcr.io
-          password: ${{ secrets.GHCR_TOKEN }}
-          tag: ${{ github.sha }}
-          tag_with_latest: true
-          extra_args: "--build-arg COMMIT_SHA=${{ github.sha }} --use-new-run"
-          image: herams-who/docker/phpfpm
-          build_file: phpfpm/Dockerfile
+          push: true
+          context: .
+          file: phpfpm/Dockerfile
+          tags: |
+            ghcr.io/herams-who/docker/phpfpm:${{ github.sha }}
+            ghcr.io/herams-who/docker/phpfpm:latest
