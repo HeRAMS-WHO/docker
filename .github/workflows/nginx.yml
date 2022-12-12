@@ -23,5 +23,5 @@ jobs:
           push: true
           context: nginx/
           tags: |
-            ghcr.io/herams-who/herams-backend/nginx:${{ github.sha }}
-            ghcr.io/herams-who/herams-backend/nginx:latest
+            ghcr.io/herams-who/docker/nginx:${{ github.sha }}
+            ghcr.io/herams-who/docker/nginx:latest
