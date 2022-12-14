@@ -5,5 +5,5 @@ RUN chmod +x /usr/bin/dumb-init
 # This translates signal SIGTERM to SIGQUIT so that nginx gracefully shuts down
 ENTRYPOINT ["/usr/bin/dumb-init", "-c", "-r", "15:3", "--", "/docker-entrypoint.sh"]
 ADD nginx.conf /
-RUN ["nginx", "-T", "/nginx.conf"]
+RUN ["nginx", "-t", "-c", "/nginx.conf"]
 CMD ["nginx", "-c", "/nginx.conf"]
