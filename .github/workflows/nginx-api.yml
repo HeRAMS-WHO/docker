@@ -5,6 +5,8 @@ on:
     paths:
       - 'nginx-api/**'
       - '.github/workflows/nginx-api.yml'
+permissions:
+  packages: write
 jobs:
   build:
     name: Build container
@@ -21,7 +23,7 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         with:
           push: true
-          context: nginx/
+          context: nginx-api/
           tags: |
             ghcr.io/herams-who/docker/nginx-api:${{ github.sha }}
             ghcr.io/herams-who/docker/nginx-api:latest

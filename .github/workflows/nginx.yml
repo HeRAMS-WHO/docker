@@ -5,6 +5,8 @@ on:
     paths:
       - 'nginx/**'
       - '.github/workflows/nginx.yml'
+permissions:
+  packages: write
 jobs:
   build:
     name: Build container
