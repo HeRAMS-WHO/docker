@@ -1,0 +1,29 @@
+name: Build php api container
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'php-api/**'
+      - '.github/workflows/php-api.yml'
+jobs:
+  build:
+    name: Build container
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/login-action@v2.1.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v3.2.0
+        with:
+          push: true
+          context: php
+          build-args: |
+            COMMIT_SHA=${{ github.sha }}
+          tags: |
+            ghcr.io/herams-who/docker/php-api:${{ github.sha }}
+            ghcr.io/herams-who/docker/php-api:latest
