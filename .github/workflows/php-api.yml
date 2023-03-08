@@ -21,7 +21,7 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         with:
           push: true
-          context: php
+          context: php-api
           build-args: |
             COMMIT_SHA=${{ github.sha }}
           tags: |
