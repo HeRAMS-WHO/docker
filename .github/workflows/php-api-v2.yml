@@ -1,12 +1,10 @@
-name: Build nginx v2
+name: Build php api container v2
 on:
   push:
     branches: [ master ]
     paths:
-      - 'v2/nginx/**'
-      - '.github/workflows/nginx_v2.yml'
-permissions:
-  packages: write
+      - 'php-api-v2/**'
+      - '.github/workflows/php-api-v2.yml'
 jobs:
   build:
     name: Build container v2
@@ -23,7 +21,9 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         with:
           push: true
-          context: v2/nginx/
+          context: php-api-v2
+          build-args: |
+            COMMIT_SHA=${{ github.sha }}
           tags: |
-            ghcr.io/herams-who/docker/nginx_v2:${{ github.sha }}
-            ghcr.io/herams-who/docker/nginx_v2:latest
+            ghcr.io/herams-who/docker/php-api-v2:${{ github.sha }}
+            ghcr.io/herams-who/docker/php-api-v2:latest
