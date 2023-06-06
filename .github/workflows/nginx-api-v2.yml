@@ -3,8 +3,8 @@ on:
   push:
     branches: [ master ]
     paths:
-      - 'v2/nginx-api/**'
-      - '.github/workflows/nginx-api_v2.yml'
+      - 'nginx-api-v2/**'
+      - '.github/workflows/nginx-api-v2.yml'
 permissions:
   packages: write
 jobs:
@@ -23,7 +23,7 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         with:
           push: true
-          context: v2/nginx-api/
+          context: nginx-api-v2/
           tags: |
-            ghcr.io/herams-who/docker/nginx-api_v2:${{ github.sha }}
-            ghcr.io/herams-who/docker/nginx-api_v2:latest
+            ghcr.io/herams-who/docker/nginx-api-v2:${{ github.sha }}
+            ghcr.io/herams-who/docker/nginx-api-v2:latest
