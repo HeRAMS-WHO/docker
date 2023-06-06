@@ -23,8 +23,7 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         with:
           push: true
-          context: .
-          file: phpfpm-v2/Dockerfile
+          context: phpfpm-v2
           tags: |
             ghcr.io/herams-who/docker/phpfpm-v2:${{ github.sha }}
             ghcr.io/herams-who/docker/phpfpm-v2:latest
