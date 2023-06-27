@@ -1,0 +1,29 @@
+name: Build v1api
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'v1api/**'
+      - '.github/workflows/v1api.yml'
+permissions:
+  packages: write
+jobs:
+  build:
+    name: Build container
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/login-action@v2.1.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v3.2.0
+        with:
+          push: true
+          context: v1api/
+          tags: |
+            ghcr.io/herams-who/docker/v1api:${{ github.sha }}
+            ghcr.io/herams-who/docker/v1api:latest
