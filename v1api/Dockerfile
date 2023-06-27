@@ -1,12 +1,15 @@
 FROM php:8.2-cli
-LABEL org.opencontainers.image.source = "https://github.com/HeRAMS-WHO/docker"
+
+LABEL org.opencontainers.image.source="https://github.com/HeRAMS-WHO/docker"
+
 # Install dependencies
-RUN apt-get update \
-   && apt-get install -y git zip unzip
+RUN apt-get update && apt-get install -y git zip unzip libpq-dev libonig-dev libcurl4-openssl-dev libssl-dev
 
 # Install Swoole
-RUN pecl install swoole \
-   && docker-php-ext-enable swoole
+RUN pecl install swoole && docker-php-ext-enable swoole
+
+# Install Sockets extension
+RUN docker-php-ext-install sockets
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -25,4 +28,3 @@ EXPOSE 8000
 
 # Start Octane
 CMD ["php", "artisan", "octane:start", "--host=0.0.0.0", "--port=8000"]
-
