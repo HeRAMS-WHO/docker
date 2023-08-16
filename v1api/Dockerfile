@@ -1,6 +1,6 @@
-FROM ubuntu:kinetic
+FROM ubuntu:22.04
 
-LABEL maintainer="Taylor Otwell"
+LABEL maintainer="Girlea Cristian"
 
 ARG WWWGROUP
 ARG NODE_VERSION=18
