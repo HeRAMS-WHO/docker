@@ -1,0 +1,31 @@
+name: Build v2lara
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'v2lara/**'
+      - '.github/workflows/v2lara.yml'
+permissions:
+  packages: write
+jobs:
+  build:
+    name: Build container
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/login-action@v2.1.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v3.2.0
+        with:
+          push: true
+          context: v2lara/
+          build-args: |
+            WWWGROUP=1000
+          tags: |
+            ghcr.io/herams-who/docker/v2lara:${{ github.sha }}
+            ghcr.io/herams-who/docker/v2lara:latest
