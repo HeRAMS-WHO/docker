@@ -1,10 +1,10 @@
-name: Build v2lara
+name: Build v2api
 on:
   push:
     branches: [ master ]
     paths:
-      - 'v2lara/**'
-      - '.github/workflows/v2lara.yml'
+      - 'v2api/**'
+      - '.github/workflows/v2api.yml'
 permissions:
   packages: write
 jobs:
